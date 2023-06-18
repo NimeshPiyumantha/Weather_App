@@ -17,6 +17,8 @@ import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [showSearch, toggleSearch] = useState(false);
+  const [locations, setLocations] = useState([]);
+  
   return (
     <View className="flex-1 relative">
       <StatusBar style="light" />
