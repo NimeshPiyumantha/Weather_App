@@ -1,11 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, Image, TextInput } from "react-native";
+import { MagnifyingGlassIcon, XMarkIcon } from "react-native-heroicons/outline";
+import { CalendarDaysIcon, MapPinIcon } from "react-native-heroicons/solid";
+import { debounce } from "lodash";
 import { theme } from "../theme";
-import { MagnifyingGlassIcon, XMarkIcon } from 'react-native-heroicons/outline'
+import * as Progress from "react-native-progress";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
+  const [showSearch, toggleSearch] = useState(false);
   return (
     <View className="flex-1 relative">
       <StatusBar style="light" />
@@ -18,15 +29,30 @@ export default function HomeScreen() {
         {/* Search Section */}
         <View style={{ height: "7%" }} className="mx-4 relative z-50">
           <View
-            className="flex-row justify-end item-center rounded-full"
-            style={{ backgroundColor: theme.bgWhite(0.2) }}
+            className="flex-row justify-end items-center rounded-full"
+            style={{
+              backgroundColor: showSearch ? theme.bgWhite(0.2) : "transparent",
+            }}
           >
-            <TextInput
-              placeholder="Search City"
-              placeholderTextColor={"lightgray"}
-              className="pl-6 h-10 flex-1 text-base text-white"
-            />
-            <TouchableOpacity>
+            {showSearch ? (
+              <TextInput
+                onChangeText={handleTextDebounce}
+                placeholder="Search city"
+                placeholderTextColor={"lightgray"}
+                className="pl-6 h-10 pb-1 flex-1 text-base text-white"
+              />
+            ) : null}
+            <TouchableOpacity
+              onPress={() => toggleSearch(!showSearch)}
+              className="rounded-full p-3 m-1"
+              style={{ backgroundColor: theme.bgWhite(0.3) }}
+            >
+              {showSearch ? (
+                <XMarkIcon size="25" color="white" />
+              ) : (
+                <MagnifyingGlassIcon size="25" color="white" />
+              )}
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
