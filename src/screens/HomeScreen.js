@@ -3,6 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, Image, TextInput } from "react-native";
 import { theme } from "../theme";
+import { MagnifyingGlassIcon, XMarkIcon } from 'react-native-heroicons/outline'
 
 export default function HomeScreen() {
   return (
@@ -25,6 +26,7 @@ export default function HomeScreen() {
               placeholderTextColor={"lightgray"}
               className="pl-6 h-10 flex-1 text-base text-white"
             />
+            <TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
